@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:/HeHStudy/surveyor.git
+  remote: git://github.com/HeHStudy/surveyor.git
   revision: 3c46ca9898cdcd1226bd40f3744a7c52ff5fff45
   branch: rails-5-multitenant
   specs:
