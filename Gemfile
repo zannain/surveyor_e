@@ -23,8 +23,7 @@ gem 'surveyor', :github => 'HeHStudy/surveyor', :branch => 'rails-5-multitenant'
 gem 'pry-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-gem 'pg', '~> 1.1.4'
-
+gem 'pg', '~> 0.18'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
@@ -33,6 +32,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :production do
+  gem 'pg', '~> 0.18'
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
