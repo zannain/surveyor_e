@@ -13,7 +13,10 @@
 
 ActiveRecord::Schema.define(version: 20190505214146) do
 
-  create_table "answers", force: true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
     t.text     "text"
     t.text     "short_text"
@@ -38,9 +41,9 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.string   "input_mask_placeholder"
   end
 
-  add_index "answers", ["api_id"], name: "uq_answers_api_id", unique: true
+  add_index "answers", ["api_id"], name: "uq_answers_api_id", unique: true, using: :btree
 
-  create_table "dependencies", force: true do |t|
+  create_table "dependencies", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "question_group_id"
     t.string   "rule"
@@ -48,7 +51,7 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.datetime "updated_at"
   end
 
-  create_table "dependency_conditions", force: true do |t|
+  create_table "dependency_conditions", force: :cascade do |t|
     t.integer  "dependency_id"
     t.string   "rule_key"
     t.integer  "question_id"
@@ -65,7 +68,7 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.datetime "updated_at"
   end
 
-  create_table "question_groups", force: true do |t|
+  create_table "question_groups", force: :cascade do |t|
     t.text     "text"
     t.text     "help_text"
     t.string   "reference_identifier"
@@ -80,9 +83,9 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.string   "api_id"
   end
 
-  add_index "question_groups", ["api_id"], name: "uq_question_groups_api_id", unique: true
+  add_index "question_groups", ["api_id"], name: "uq_question_groups_api_id", unique: true, using: :btree
 
-  create_table "questions", force: true do |t|
+  create_table "questions", force: :cascade do |t|
     t.integer  "survey_section_id"
     t.integer  "question_group_id"
     t.text     "text"
@@ -105,9 +108,9 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.string   "api_id"
   end
 
-  add_index "questions", ["api_id"], name: "uq_questions_api_id", unique: true
+  add_index "questions", ["api_id"], name: "uq_questions_api_id", unique: true, using: :btree
 
-  create_table "response_sets", force: true do |t|
+  create_table "response_sets", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "survey_id"
     t.string   "access_code"
@@ -118,10 +121,10 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.string   "api_id"
   end
 
-  add_index "response_sets", ["access_code"], name: "response_sets_ac_idx", unique: true
-  add_index "response_sets", ["api_id"], name: "uq_response_sets_api_id", unique: true
+  add_index "response_sets", ["access_code"], name: "response_sets_ac_idx", unique: true, using: :btree
+  add_index "response_sets", ["api_id"], name: "uq_response_sets_api_id", unique: true, using: :btree
 
-  create_table "responses", force: true do |t|
+  create_table "responses", force: :cascade do |t|
     t.integer  "response_set_id"
     t.integer  "question_id"
     t.integer  "answer_id"
@@ -139,10 +142,10 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.string   "api_id"
   end
 
-  add_index "responses", ["api_id"], name: "uq_responses_api_id", unique: true
-  add_index "responses", ["survey_section_id"], name: "index_responses_on_survey_section_id"
+  add_index "responses", ["api_id"], name: "uq_responses_api_id", unique: true, using: :btree
+  add_index "responses", ["survey_section_id"], name: "index_responses_on_survey_section_id", using: :btree
 
-  create_table "survey_sections", force: true do |t|
+  create_table "survey_sections", force: :cascade do |t|
     t.integer  "survey_id"
     t.string   "title"
     t.text     "description"
@@ -156,7 +159,7 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.datetime "updated_at"
   end
 
-  create_table "survey_translations", force: true do |t|
+  create_table "survey_translations", force: :cascade do |t|
     t.integer  "survey_id"
     t.string   "locale"
     t.text     "translation"
@@ -164,7 +167,7 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.datetime "updated_at"
   end
 
-  create_table "surveys", force: true do |t|
+  create_table "surveys", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.string   "access_code"
@@ -187,10 +190,10 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.string   "published_reference"
   end
 
-  add_index "surveys", ["access_code", "survey_version"], name: "surveys_access_code_version_idx", unique: true
-  add_index "surveys", ["api_id"], name: "uq_surveys_api_id", unique: true
+  add_index "surveys", ["access_code", "survey_version"], name: "surveys_access_code_version_idx", unique: true, using: :btree
+  add_index "surveys", ["api_id"], name: "uq_surveys_api_id", unique: true, using: :btree
 
-  create_table "validation_conditions", force: true do |t|
+  create_table "validation_conditions", force: :cascade do |t|
     t.integer  "validation_id"
     t.string   "rule_key"
     t.string   "operator"
@@ -208,7 +211,7 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.datetime "updated_at"
   end
 
-  create_table "validations", force: true do |t|
+  create_table "validations", force: :cascade do |t|
     t.integer  "answer_id"
     t.string   "rule"
     t.string   "message"
