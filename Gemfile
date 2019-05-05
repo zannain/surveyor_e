@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.6'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.3.13'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
@@ -24,6 +23,7 @@ gem 'surveyor', :github => 'HeHStudy/surveyor', :branch => 'rails-5-multitenant'
 gem 'pry-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'pg'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
