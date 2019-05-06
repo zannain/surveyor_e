@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190505214146) do
+ActiveRecord::Schema.define(version: 20190506052335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,10 +140,12 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.datetime "updated_at"
     t.integer  "survey_section_id"
     t.string   "api_id"
+    t.integer  "user_id"
   end
 
   add_index "responses", ["api_id"], name: "uq_responses_api_id", unique: true, using: :btree
   add_index "responses", ["survey_section_id"], name: "index_responses_on_survey_section_id", using: :btree
+  add_index "responses", ["user_id"], name: "index_responses_on_user_id", using: :btree
 
   create_table "survey_sections", force: :cascade do |t|
     t.integer  "survey_id"
@@ -193,6 +195,12 @@ ActiveRecord::Schema.define(version: 20190505214146) do
   add_index "surveys", ["access_code", "survey_version"], name: "surveys_access_code_version_idx", unique: true, using: :btree
   add_index "surveys", ["api_id"], name: "uq_surveys_api_id", unique: true, using: :btree
 
+  create_table "users", force: :cascade do |t|
+    t.string   "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "validation_conditions", force: :cascade do |t|
     t.integer  "validation_id"
     t.string   "rule_key"
@@ -219,4 +227,5 @@ ActiveRecord::Schema.define(version: 20190505214146) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "responses", "users"
 end

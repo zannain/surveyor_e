@@ -1,0 +1,8 @@
+<div>
+    <ul>
+        <% @surveys.each do |response| %>
+                <li><%= response.title %></li>
+        <% end %>
+    </ul>
+    <%= link_to "Home Page", root_path %>
+</div>
