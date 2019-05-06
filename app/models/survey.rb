@@ -10,6 +10,5 @@ class Survey < ActiveRecord::Base
       end
 
     def title
-      "Custom #{super}"
     end
   end

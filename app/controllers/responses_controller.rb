@@ -1,5 +1,6 @@
 class ResponsesController < ApplicationController
 
+    # GET All the surveys that have been taken and list them
     def index
         @responses = ResponseSet.joins(:responses, :survey)
         @surveys = []
