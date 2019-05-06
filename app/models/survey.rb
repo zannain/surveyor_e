@@ -8,7 +8,4 @@ class Survey < ActiveRecord::Base
         super(*args)
         default_args
       end
-
-    def title
-    end
   end
